@@ -1,5 +1,4 @@
 /*
-SETUP
 
 You're working with an intern that keeps coming to you with JavaScript code that won't run because the braces, brackets, and parentheses are off. To save you both some time, you decide to write a braces/brackets/parentheses validator.
 Let's say:
@@ -81,105 +80,74 @@ If we finish iterating and our stack is empty, we know every opener was properly
 Complexity
 O(n)O(n) time (one iteration through the string), and O(n)O(n) space (in the worst case, all of our characters are openers, so we push them all onto the stack).
 
-Bonus
-In Ruby, sometimes expressions are surrounded by vertical bars, "|like this|". Extend your validator to validate vertical bars. Careful: there's no difference between the "opener" and "closer" in this case—they're the same character!
-
-
 */
-//we're only concerned about checking that the a closer comes after an opener!
 
 let checkBracket = (code) => {
-//function checkBracket(code) {
-  var openers_to_closers = {
+  let openers_to_closers = {
     '(': ')',
     '{': '}',
     '[': ']'
   };
 
-  var openers = Object.keys(openers_to_closers);
+  let openers = Object.keys(openers_to_closers);
 
-  var closers = Object.keys(openers_to_closers).map(function (key) {
+  let closers = Object.keys(openers_to_closers).map( function (key) {
+
     return openers_to_closers[key];
-	});
+	 });
 
-  var openers_stack = [];
-
-  //console.log(code[code.length -1]);
+  let openers_stack = [];
 
   // Iterate over our input param
-  for( char of code) {
+  for( char of code ) {
 
     // Checking the opener array [ (,{,[ ]
-  	for( let i of openers) {
+    for( let i of openers ) {
 
       // If the char is an opener
-      if(char == i) {
+      if( char == i ) {
         // Insert it into the open_stack array
         openers_stack.push(char);
       }
     }
 
   	//checking the closer array [ ),},] ]
-    for( let i of closers) {
+    for( let i of closers ) {
 
       // if the char is a closer...
-      if(char == i) {
-        console.log('i123 '+ i)
+      if( char == i ) {
+
         // If You have a closer but no openers
-        if(openers_stack.length == 0) {
+        if( openers_stack.length == 0 ) {
 
-          	console.log("There aren't any " + openers + " in your program");
-            return false;
+          console.log( "There aren't any " + openers + " in your program" );
+          return false;
 
-        }else {
+        } else {
 
           // check if the current char is a closer for the last opener in the open_stack array
-          for( let i of openers_stack) {
-             console.log('i '+i)
-            console.log('openers_stack ' + openers_stack)
-						console.log('openers_to_closers[i] ' + openers_to_closers[i])
-            // if this Object keys(i) value is equal to char, we want to remove it from the array
-            //
-            // HERES THE PROBLEM
-            // its checking the closer to the opener, but it's failing out before checking ALL of the possible openers
-            // I need to loop through this list and check the char against each one.
-            // do I use a forEach or a for..in or for..of
+          for( let i of openers_stack ) {
 
-            for(a of as) {
-            if(i == char) {
+            // Grab the last opener in the array
+            let checkem = openers_stack[openers_stack.length -1];
 
-							console.log('it does '+ char);
+							 // If the closer for the last opener matches the current char..
+              if( openers_to_closers[checkem] == char ) {
+
               // Setting this var to the last opener in the array
               let last_unclosed_opener = openers_stack.pop();
 
-              if (!openers_to_closers[last_unclosed_opener] == char) {
+              if ( !openers_to_closers[last_unclosed_opener] == char ) {
 
-                	console.log('your code sucks ' + char )
-                  return false
+                console.log( 'your code sucks ' + char )
+                return false
               }
+              // Escape the loop after removing that last char from the openers stack
+              break;
 
              // If there is no opener that matches the same style closer
             } else {
-              console.log('no opener for your closer');
-              return false;
-            }
-            }
-
-            if(openers_to_closers[i] == char) {
-
-							console.log('it does '+ char);
-              // Setting this var to the last opener in the array
-              let last_unclosed_opener = openers_stack.pop();
-
-              if (!openers_to_closers[last_unclosed_opener] == char) {
-
-                	console.log('your code sucks ' + char )
-                  return false
-              }
-
-             // If there is no opener that matches the same style closer
-            } else {
-              console.log('no opener for your closer');
+              console.log( 'no opener for your closer ' + char) ;
               return false;
             }
           }
@@ -187,8 +155,11 @@ let checkBracket = (code) => {
       }
     }
   }
- 	console.log(openers_stack.length == []);
+
+  console.log( openers_stack.length == [] );
   return openers_stack.length == [];
 }
 
-checkBracket('({}])');
+checkBracket('({}{[]}())'); // true;
+checkBracket('({}{[]]}())'); // false
+                    ^ error
