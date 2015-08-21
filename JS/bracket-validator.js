@@ -82,21 +82,32 @@ O(n)O(n) time (one iteration through the string), and O(n)O(n) space (in the wor
 
 */
 
-let checkBracket = (code) => {
-  let openers_to_closers = {
-    '(': ')',
-    '{': '}',
-    '[': ']'
+/*
+** Update to the checkBracket function
+*/
+
+let checkBracket = code => {
+
+  // Instead of creating an object, I'll take advantage of ES6's new Map feature
+  let openers_to_closers = new Map();
+
+  // Add the openers and closers to the Map
+  openers_to_closers.set('(',')');
+  openers_to_closers.set('{','}');
+  openers_to_closers.set('[',']');
+
+  let openers =[];
+  let closers = [];
+  let openers_stack = [];
+
+  // Build out our openers and closers array with values from the Map
+  let logMap = (value, key, map) => {
+    openers.push(key);
+    closers.push(value);
   };
 
-  let openers = Object.keys(openers_to_closers);
-
-  let closers = Object.keys(openers_to_closers).map( function (key) {
-
-    return openers_to_closers[key];
-	 });
-
-  let openers_stack = [];
+  // Callback to run the above function
+  openers_to_closers.forEach(logMap);
 
   // Iterate over our input param
   for( char of code ) {
@@ -132,12 +143,14 @@ let checkBracket = (code) => {
             let checkem = openers_stack[openers_stack.length -1];
 
 							 // If the closer for the last opener matches the current char..
-              if( openers_to_closers[checkem] == char ) {
+               // Note the use of .get() here is because openers_to_closers is a Map not an object
+              if( openers_to_closers.get(checkem) == char ) {
 
               // Setting this var to the last opener in the array
               let last_unclosed_opener = openers_stack.pop();
 
-              if ( !openers_to_closers[last_unclosed_opener] == char ) {
+              // Note the use of .get() here is because openers_to_closers is a Map not an object
+              if ( !openers_to_closers.get(last_unclosed_opener) == char ) {
 
                 console.log( 'your code sucks ' + char )
                 return false
@@ -160,6 +173,6 @@ let checkBracket = (code) => {
   return openers_stack.length == [];
 }
 
-checkBracket('({}{[]}())'); // true;
+checkBracket('({}{[]}({}))'); // true;
 checkBracket('({}{[]]}())'); // false
                     ^ error
