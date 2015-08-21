@@ -88,19 +88,28 @@ O(n)O(n) time and O(1)O(1) additional space.
 
 
 
-var deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52];
+let deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52];
 
 // First half of the deck
 let half1 = deck.slice(0, deck.length/2);
 
 // Second half of the deck
 let half2 = deck.slice(26, deck.length);
+console.log(half1)
 
-let shuffled_arr_deck = half1.map(function (e, i) {
-    return [half1[i], half2[i]];
-});
 
-let shuffled_deck = shuffled_arr_deck.toString().split(',').map(Number);
+let shuffled_arr_deck = half1.map((e,i) => [half1[i], half2[i]]);
+
+let shuffled_deck = [];
+
+let logMap = (value, key, map) => {
+
+    shuffled_deck.push(...value);
+};
+
+shuffled_arr_deck.forEach(logMap);
+
+
 // shuffled_deck = [1, 27, 2, 28, 3, 29, 4, 30, 5, 31, 6, 32, 7, 33, 8, 34, 9, 35, 10, 36, 11, 37, 12, 38, 13, 39, 14, 40, 15, 41, 16, 42, 17, 43, 18, 44, 19, 45, 20, 46, 21, 47, 22, 48, 23, 49, 24, 50, 25, 51, 26, 52]
 
 let shuffled_deck_2 = [1, 14, 27, 40, 2, 15, 28, 41, 3, 16, 29, 42, 4, 17, 30, 43, 5, 18, 31, 44, 6, 19, 32, 45, 7, 20, 33, 46, 8, 21, 34, 47, 9, 22, 35, 48, 10, 23, 36, 49, 11, 24, 37, 50, 12, 25, 38, 51, 13, 26, 39, 52];
@@ -127,10 +136,10 @@ let is_single_riffle = (half1, half2, shuffled_deck) => {
 
     } else {
 
-      return false;
+      return console.log(false);
     }
   }
-  return true;
+  return console.log(true);
 }
 
 is_single_riffle(half1, half2, shuffled_deck); // true;
