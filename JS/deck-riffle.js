@@ -95,8 +95,6 @@ let half1 = deck.slice(0, deck.length/2);
 
 // Second half of the deck
 let half2 = deck.slice(26, deck.length);
-console.log(half1)
-
 
 let shuffled_arr_deck = half1.map((e,i) => [half1[i], half2[i]]);
 
