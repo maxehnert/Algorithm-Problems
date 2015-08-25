@@ -25,9 +25,8 @@ Yes my commenting is ugly.
 let wordCloud = string => {
 
   let sortedWords = [];
-  let known_word;
-  let unknown_word;
   let word_object = {};
+  /* Should think about using new Map() instead of using an object and then later creating the same key,value array. It could elminate a loop and rduce O space and time*/
 
   // Loop through our array of words
   // Separate the string into individual words which also makes it an array
