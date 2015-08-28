@@ -12,7 +12,7 @@ let isDivisible = (x) => {
       // if i is equal to the largest divisor
       if (i === maxDivisor) {
         // then we've found the answer
-        //console.log(i);
+        console.log(x);
        return true;
       }
       i++;
@@ -20,9 +20,10 @@ let isDivisible = (x) => {
 };
 
 let euler5 = () => {
-  let x = 2;
+  let x = 0;
+
   while(!isDivisible(x)) {
-    x++;
+    x += 20;
   }
 };
 
