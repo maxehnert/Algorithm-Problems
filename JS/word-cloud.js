@@ -51,7 +51,7 @@ let wordCloud = string => {
     let valid_letters = /[a-z]/;
 
     // Push each key,value into an array of arrays
-    if( valid_letters.test(word[0]) ) {
+    if( valid_letters.test(word) ) {
     	sortedWords.push( [word, word_object[word]] );
     }
   }
