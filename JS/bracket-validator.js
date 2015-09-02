@@ -175,4 +175,4 @@ let checkBracket = code => {
 
 checkBracket('({}{[]}({}))'); // true;
 checkBracket('({}{[]]}())'); // false
-                    ^ error
+//                  ^ error

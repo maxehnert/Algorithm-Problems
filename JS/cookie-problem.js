@@ -14,9 +14,9 @@ print merge_arrays(my_array, alices_array)
 Gotchas
 We can do this in O(n)O(n) time and space.
 
-If you're running a built-in sorting function, your algorithm probably takes O(n\lg{n})O(nlgn) time for that sort.
+If youre running a built-in sorting function, your algorithm probably takes O(n\lg{n})O(nlgn) time for that sort.
 
-Think about edge cases! What happens when we've merged in all of the elements from one of our arrays but we still have elements to merge in from our other array?
+Think about edge cases! What happens when weve merged in all of the elements from one of our arrays but we still have elements to merge in from our other array?
 
 Breakdown
 We could simply concatenate (join together) the two arrays into one, then sort the result:
@@ -27,7 +27,7 @@ What would the time cost be?
 
 O(n\lg{n})O(nlgn), where nn is the total length of our output array (the sum of the lengths of our inputs).
 
-We can do better. With this algorithm, we're not really taking advantage of the fact that the input arrays are themselves already sorted. How can we save time by using this fact?
+We can do better. With this algorithm, were not really taking advantage of the fact that the input arrays are themselves already sorted. How can we save time by using this fact?
 
 A good general strategy for thinking about an algorithm is to try writing out a sample input and performing the operation by hand. If you're stuck, try that!
 
