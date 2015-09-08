@@ -2,7 +2,7 @@
  * Find the first no repeating character in a string
 */
 
-let norepeat = str => {
+let noRepeat = str => {
 
   /*
    * Make all the letters lower case to avoid any of that.
@@ -24,11 +24,10 @@ let norepeat = str => {
       if( lastChar == char || char == ' ' ) {
         break;
       }else {
-        return console.log('this 1 dif '+ char);
-        break;
+        return console.log('this 1 different '+ char);
       }
-    };
+
   };
 };
 
-norepeat('aa aaAb');
+noRepeat('aa aaAb');
