@@ -1,35 +1,6 @@
 /*
-I figured out how to get rich: online poker.
-I suspect the online poker game I'm playing shuffles cards by doing a single " riffle ↴ ."
 
-To prove this, let's write a function to tell us if a full deck of cards shuffled_deck is a single riffle of two other halves half1 and half2.
-
-We'll represent a stack of cards as an array of integers in the range 1..521..52 (since there are 5252 distinct cards in a deck).
-
-Why do I care? A single riffle is not a completely random shuffle. If I'm right, I can make more informed bets and get rich and finally prove to my ex that I am not a "loser with an unhealthy cake obsession" (even though it's too late now because she let me go and she's never getting me back).
-
-Gotchas
-Watch out for index out of bounds errors! Will your function ever try to grab the 0th item from an empty array, or the nth item from an array with n elements (where the last index would be n-1n−1)?
-
-We can do this in O(n)O(n) time and O(1)O(1) additional space.
-
-Did you come up with a recursive solution? Keep in mind that you may be incurring a hidden space cost (probably O(n)O(n)) in the call stack ↴ ! You can avoid this using an iterative approach.
-
-Breakdown
-How can we re-phrase this problem in terms of smaller subproblems?
-
-Breaking the problem into smaller subproblems will clearly involve reducing the size of at least one of our stacks of cards. So to start, let's try taking the first card out of shuffled_deck.
-
-What should be true of this card if shuffled_deck is a riffle of half1 and half2?
-
-If shuffled_deck is a riffle of half1 and half2, then the first card from shuffled_deck should be either the same as the first card from half1 or the same as the first card from half2.
-
-Now that we know the first card checks out, how do we get to our subproblem?
-
-Let's "throw out" the top card from shuffled_deck as well as the card it matched with from the top of half1 or half2. Those cards are now "accounted for."
-
-Now we're left with a smaller version of the original problem, which we can solve using the same approach! So we keep doing this over and over until we exhaust shuffled_deck. If we get to the end and each card "checks out," we return True.
-
+Determine if the deck of cards is a single riffle, or multiple riffle.
 
 Solution
 

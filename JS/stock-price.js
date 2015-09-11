@@ -3,48 +3,48 @@ We’ll greedily ↴ walk through the array to track the max profit and lowest p
 
 For every price, we check if:
 
-we can get a better profit by buying at min_price and selling at the current_price
-we have a new min_price
+we can get a better profit by buying at minPrice and selling at the currentPrice
+we have a new minPrice
 To start, we initialize:
 
-min_price as the first price of the day
-max_profit as the first profit we could get
+minPrice as the first price of the day
+maxProfit as the first profit we could get
 We decided to return a negative profit if the price decreases all day and we can't make any money. We could have thrown an error instead, but returning the negative profit is cleaner, makes our function less opinionated, and ensures we don't lose information.
 
-  def get_max_profit(stock_prices_yesterday):
+  def getMaxProfit(stockPricesYesterday):
 
     # make sure we have at least 2 prices
-    if len(stock_prices_yesterday) < 2:
+    if len(stockPricesYesterday) < 2:
         raise IndexError('Getting a profit requires at least 2 prices')
 
-    # well greedily update min_price and max_profit, so we initialize
+    # well greedily update minPrice and maxProfit, so we initialize
     # them to the first price and the first possible profit
-    min_price = stock_prices_yesterday[0]
-    max_profit = stock_prices_yesterday[1] - stock_prices_yesterday[0]
+    minPrice = stockPricesYesterday[0]
+    maxProfit = stockPricesYesterday[1] - stockPricesYesterday[0]
 
-    for index, current_price in enumerate(stock_prices_yesterday):
+    for index, currentPrice in enumerate(stockPricesYesterday):
 
         # skip the first (0th) time
         # we cant sell at the first time, since we must buy first,
         # and we can't buy and sell at the same time!
         # if we took this out, we'd try to buy /and/ sell at time 0.
         # this would give a profit of 0, which is a problem if our
-        # max_profit is supposed to be /negative/--we'd return 0!
+        # maxProfit is supposed to be /negative/--we'd return 0!
         if index == 0:
             continue
 
         # see what our profit would be if we bought at the
         # min price and sold at the current price
-        potential_profit = current_price - min_price
+        potential_profit = currentPrice - minPrice
 
-        # update max_profit if we can do better
-        max_profit = max(max_profit, potential_profit)
+        # update maxProfit if we can do better
+        maxProfit = max(maxProfit, potential_profit)
 
-        # update min_price so its always
+        # update minPrice so its always
         # the lowest price we've seen so far
-        min_price  = min(min_price, current_price)
+        minPrice  = min(minPrice, currentPrice)
 
-    return max_profit
+    return maxProfit
 
 
 /*
@@ -54,35 +54,35 @@ We decided to return a negative profit if the price decreases all day and we can
  * it was pretty straight up.
 */
 
-let get_max_profit = stock_prices_yesterday => {
+let getMaxProfit = stockPricesYesterday => {
 
-  // stock_prices_yesterday is an array
+  // stockPricesYesterday is an array
 
-  let min_price = stock_prices_yesterday[0];
-  let max_profit = stock_prices_yesterday[1] - stock_prices_yesterday[0];
+  let minPrice = stockPricesYesterday[0];
+  let maxProfit = stockPricesYesterday[1] - stockPricesYesterday[0];
 
   // make sure we have at least 2 prices
-  if ( stock_prices_yesterday.length < 2 ) {
+  if ( stockPricesYesterday.length < 2 ) {
     return false;
   }
 
-  for (current_price of stock_prices_yesterday) {
+  for ( currentPrice of stockPricesYesterday ) {
 
-    if( stock_prices_yesterday.indexOf(current_price) == 0 ) {
+    if( stockPricesYesterday.indexOf(currentPrice) == 0 ) {
       continue;
     }
 
-    let potential_profit = current_price - min_price;
+    let potential_profit = currentPrice - minPrice;
 
-    max_profit = Math.max(max_profit, potential_profit);
+    maxProfit = Math.max( maxProfit, potential_profit );
 
-    min_price  = Math.min(min_price, current_price);
+    minPrice  = Math.min( minPrice, currentPrice );
 
   }
-  console.log( max_profit);
-  return max_profit;
+  console.log( maxProfit );
+  return maxProfit;
 
 }
 
-get_max_profit([70,20,90]); // 70
-get_max_profit([70,90,30]); // 20
+getMaxProfit([70,20,90]); // 70
+getMaxProfit([70,90,30]); // 20

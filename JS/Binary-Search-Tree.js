@@ -148,10 +148,12 @@ function Node(val){
   this.value = val;
   this.left = null;
   this.right = null;
+  console.log('new node func'); //2 //4 /8 //12 //19
 }
 
 function BinarySearchTree(){
   this.root = null;
+  console.log('bst func'); //1
 }
 
 BinarySearchTree.prototype.push = function(val){
@@ -159,6 +161,7 @@ BinarySearchTree.prototype.push = function(val){
 
    if(!root){
       this.root = new Node(val);
+      console.log('this.root = new node'); //3
       return;
    }
 
@@ -166,21 +169,28 @@ BinarySearchTree.prototype.push = function(val){
    var newNode = new Node(val);
 
    while(currentNode){
+     console.log('while currentNode'); //5 //9 //13 //16 //20 //23
       if(val < currentNode.value){
+        console.log('val < currentNode.value'); //6 //14 //17
           if(!currentNode.left){
              currentNode.left = newNode;
+             console.log('if break'); //7 //18
              break;
           }
           else{
+            console.log('currentNode = currentNode.left;'); //15
              currentNode = currentNode.left;
         }
      }
      else{
+       console.log('else to: val < currentNode.value'); //10 //21 //24
          if(!currentNode.right){
             currentNode.right = newNode;
+            console.log('else break'); //11 //25
             break;
          }
          else{
+           console.log('  currentNode = currentNode.right;'); //22
             currentNode = currentNode.right;
          }
      }
@@ -210,7 +220,7 @@ BinarySearchTree.prototype.push = val => {
 
   var root = self.root;
 
-  if(!root) {
+  if( !root ) {
     self.root = new Node(val);
     return;
   }
@@ -218,9 +228,9 @@ BinarySearchTree.prototype.push = val => {
   var currentNode = root;
   var newNode = new Node(val);
 
-  while(currentNode) {
-    if( val < currentNode.value) {
-      if( !currentNode.left) {
+  while( currentNode ) {
+    if( val < currentNode.value ) {
+      if( !currentNode.left ) {
         currentNode.left = newNode;
         break;
 
@@ -231,7 +241,6 @@ BinarySearchTree.prototype.push = val => {
         currentNode = currentNode.right;
     }
   }
-
 }
 
 var bst = new BinarySearchTree();
@@ -241,3 +250,134 @@ bst.push(2);
 bst.push(4);
 bst.push(1);
 bst.push(5);
+
+
+
+
+1.  bst func
+2.  new node func
+3.  this.root = new node
+4.  new node func
+5.  while currentNode
+6.  val < currentNode.value
+7.  if break
+8.  new node func
+9.  while currentNode
+10. else to: val < currentNode.value
+11. else break
+12. new node func
+13. while currentNode
+14. val < currentNode.value
+15. currentNode = currentNode.left;
+16. while currentNode
+17. val < currentNode.value
+18. if break
+19. new node func
+20. while currentNode
+21. else to: val < currentNode.value
+22. currentNode = currentNode.right;
+23. while currentNode
+24. else to: val < currentNode.value
+25. else break
+
+
+
+
+//////////////////////////////////////
+
+function BinarySearchTree() {
+    this._root = null;
+}
+
+BinarySearchTree.prototype = {
+
+    //restore constructor
+    constructor: BinarySearchTree,
+
+    add: function(value){
+        //create a new item object, place data in
+        var node = {
+                value: value,
+                left: null,
+                right: null
+            },
+
+            //used to traverse the structure
+            current;
+
+        //special case: no items in the tree yet
+        if (this._root === null){
+            this._root = node;
+        } else {
+            current = this._root;
+
+            while(true){
+
+                //if the new value is less than this node's value, go left
+                if (value < current.value){
+
+                    //if there's no left, then the new node belongs there
+                    if (current.left === null){
+                        current.left = node;
+                        break;
+                    } else {
+                        current = current.left;
+                    }
+
+                //if the new value is greater than this node's value, go right
+                } else if (value > current.value){
+
+                    //if there's no right, then the new node belongs there
+                    if (current.right === null){
+                        current.right = node;
+                        break;
+                    } else {
+                        current = current.right;
+                    }
+
+                //if the new value is equal to the current one, just ignore
+                } else {
+                    break;
+                }
+            }
+        }
+    },
+
+    contains: function(value){
+        var found       = false,
+            current     = this._root
+
+        //make sure there's a node to search
+        while(!found && current){
+
+            //if the value is less than the current node's, go left
+            if (value < current.value){
+                current = current.left;
+
+            //if the value is greater than the current node's, go right
+            } else if (value > current.value){
+                current = current.right;
+
+            //values are equal, found it!
+            } else {
+                found = true;
+            }
+        }
+
+        //only proceed if the node was found
+        return found;
+    },
+
+    remove: function(value){
+    },
+
+    size: function(){
+    },
+
+    toArray: function(){
+    },
+
+    toString: function(){
+    }
+
+};

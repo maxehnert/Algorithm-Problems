@@ -1,5 +1,5 @@
 /*
-I originally found this chalenge on Interviewcake but never got to see the code for it. A quick search turned up a SO result from someone who built a very nice implementation of a word cloud and below is what was mentioned for how to build one. This was the only guildline I had for doing this. I'm certain my function is much more verbose than it needs to be (It goes string, array, object, array and many loops new new arrays) but it works and was fun doing. Perhaps I'll work on getting it tighter.
+I originally found this chalenge on Interviewcake but never got to see the code for it. A quick search turned up a SO result from someone who built a very nice implementation of a word cloud in Java  and below is what was mentioned for how to build one. This was the only guildline I had for doing this. I'm certain my function is much more verbose than it needs to be (It goes string, array, object, array and many loops new new arrays) but it works and was fun doing. Perhaps I'll work on getting it tighter.
 ------
 
 Count the words, throw away boring words, and sort by the count, descending. Keep the top N words for some N. Assign each word a font size proportional to its count. Generate a Java2D Shape for each word, using the Java2D API.
