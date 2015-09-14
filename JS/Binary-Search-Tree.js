@@ -144,157 +144,15 @@ Were doing one walk down our BST, which means O(h)O(h) time, where hh is the hei
 
 
 
-function Node(val){
-  this.value = val;
-  this.left = null;
-  this.right = null;
-  console.log('new node func'); //2 //4 /8 //12 //19
-}
-
-function BinarySearchTree(){
-  this.root = null;
-  console.log('bst func'); //1
-}
-
-BinarySearchTree.prototype.push = function(val){
-   var root = this.root;
-
-   if(!root){
-      this.root = new Node(val);
-      console.log('this.root = new node'); //3
-      return;
-   }
-
-   var currentNode = root;
-   var newNode = new Node(val);
-
-   while(currentNode){
-     console.log('while currentNode'); //5 //9 //13 //16 //20 //23
-      if(val < currentNode.value){
-        console.log('val < currentNode.value'); //6 //14 //17
-          if(!currentNode.left){
-             currentNode.left = newNode;
-             console.log('if break'); //7 //18
-             break;
-          }
-          else{
-            console.log('currentNode = currentNode.left;'); //15
-             currentNode = currentNode.left;
-        }
-     }
-     else{
-       console.log('else to: val < currentNode.value'); //10 //21 //24
-         if(!currentNode.right){
-            currentNode.right = newNode;
-            console.log('else break'); //11 //25
-            break;
-         }
-         else{
-           console.log('  currentNode = currentNode.right;'); //22
-            currentNode = currentNode.right;
-         }
-     }
-  }
-
-}
-
-var bst = new BinarySearchTree();
-
-bst.push(3);
-bst.push(2);
-bst.push(4);
-bst.push(1);
-bst.push(5);
-///////////////////
-
-var Node = val => {
-  var self = this;
-  self.value = val;
-  self.left = null;
-  self.right = null;
-};
-
-var BinarySearchTree = () => self.root = null;
-
-BinarySearchTree.prototype.push = val => {
-
-  var root = self.root;
-
-  if( !root ) {
-    self.root = new Node(val);
-    return;
-  }
-
-  var currentNode = root;
-  var newNode = new Node(val);
-
-  while( currentNode ) {
-    if( val < currentNode.value ) {
-      if( !currentNode.left ) {
-        currentNode.left = newNode;
-        break;
-
-      } else {
-          currentNode = currentNode.left;
-      }
-    } else {
-        currentNode = currentNode.right;
-    }
-  }
-}
-
-var bst = new BinarySearchTree();
-
-bst.push(3);
-bst.push(2);
-bst.push(4);
-bst.push(1);
-bst.push(5);
-
-
-
-
-1.  bst func
-2.  new node func
-3.  this.root = new node
-4.  new node func
-5.  while currentNode
-6.  val < currentNode.value
-7.  if break
-8.  new node func
-9.  while currentNode
-10. else to: val < currentNode.value
-11. else break
-12. new node func
-13. while currentNode
-14. val < currentNode.value
-15. currentNode = currentNode.left;
-16. while currentNode
-17. val < currentNode.value
-18. if break
-19. new node func
-20. while currentNode
-21. else to: val < currentNode.value
-22. currentNode = currentNode.right;
-23. while currentNode
-24. else to: val < currentNode.value
-25. else break
-
-
-
-
-//////////////////////////////////////
-
-function BinarySearchTree() {
-    this._root = null;
-}
-
-BinarySearchTree.prototype = {
+class BinarySearchTree {
 
     //restore constructor
-    constructor: BinarySearchTree,
+  //  constructor: BinarySearchTree,
+    constructor() {
+            this._root = null;
+    };
 
-    add: function(value){
+    add (value) {
         //create a new item object, place data in
         var node = {
                 value: value,
@@ -306,18 +164,18 @@ BinarySearchTree.prototype = {
             current;
 
         //special case: no items in the tree yet
-        if (this._root === null){
+        if (this._root === null) {
             this._root = node;
         } else {
             current = this._root;
 
-            while(true){
+            while(true) {
 
                 //if the new value is less than this node's value, go left
-                if (value < current.value){
+                if (value < current.value) {
 
                     //if there's no left, then the new node belongs there
-                    if (current.left === null){
+                    if (current.left === null) {
                         current.left = node;
                         break;
                     } else {
@@ -325,10 +183,10 @@ BinarySearchTree.prototype = {
                     }
 
                 //if the new value is greater than this node's value, go right
-                } else if (value > current.value){
+                } else if (value > current.value) {
 
                     //if there's no right, then the new node belongs there
-                    if (current.right === null){
+                    if (current.right === null) {
                         current.right = node;
                         break;
                     } else {
@@ -341,21 +199,21 @@ BinarySearchTree.prototype = {
                 }
             }
         }
-    },
+    };
 
-    contains: function(value){
-        var found       = false,
-            current     = this._root
+    contains (value) {
+        var found = false;
+        var current = this._root;
 
         //make sure there's a node to search
-        while(!found && current){
+        while(!found && current) {
 
             //if the value is less than the current node's, go left
-            if (value < current.value){
+            if (value < current.value) {
                 current = current.left;
 
             //if the value is greater than the current node's, go right
-            } else if (value > current.value){
+            } else if (value > current.value) {
                 current = current.right;
 
             //values are equal, found it!
@@ -366,12 +224,12 @@ BinarySearchTree.prototype = {
 
         //only proceed if the node was found
         return found;
-    },
+    };
 
-    traverse: function(process) {
+    traverse (process) {
 
       //helper function
-      function inOrder(node) {
+      var inOrder = node => {
           if (node) {
 
               //traverse the left subtree
@@ -391,7 +249,7 @@ BinarySearchTree.prototype = {
 
       //start with the root
       inOrder(this._root);
-    },
+    };
 
     /**
      * Removes the node with the given value from the tree. This may require
@@ -401,11 +259,11 @@ BinarySearchTree.prototype = {
      * @return {void}
      * @method remove
      */
-    remove: function(value) {
+    remove (value) {
 
       var found = false;
-      var parent = null
-      var current = this._root
+      var parent = null;
+      var current = this._root;
       var childCount;
       var replacement;
       var replacementParent;
@@ -489,7 +347,7 @@ BinarySearchTree.prototype = {
             //no children, just remove it from the parent
             case 0:
               //if the current value is less than its parent's, null out the left pointer
-              if (current.value < parent.value){
+              if (current.value < parent.value) {
                   parent.left = null;
 
               //if the current value is greater than its parent's, null out the right pointer
@@ -518,7 +376,7 @@ BinarySearchTree.prototype = {
               replacementParent = current;
 
               //find the right-most node
-              while(replacement.right !== null){
+              while(replacement.right !== null) {
                   replacementParent = replacement;
                   replacement = replacement.right;
               }
@@ -530,7 +388,7 @@ BinarySearchTree.prototype = {
               replacement.left = current.left;
 
               //place the replacement in the right spot
-              if (current.value < parent.value){
+              if (current.value < parent.value) {
                   parent.left = replacement;
               } else {
                   parent.right = replacement;
@@ -539,115 +397,26 @@ BinarySearchTree.prototype = {
           }
         }
       }
-    },
+    };
 
-    size: function() {
+    size () {
         var length = 0;
 
-        this.traverse( function(node) {
-            length++;
-        });
+        this.traverse( node => length++ );
 
         return length;
-    },
+    };
 
-    toArray: function() {
+    toArray () {
         var result = [];
 
-        this.traverse( function(node) {
-            result.push(node.value);
-        });
+        this.traverse( node => result.push(node.value) );
 
         return result;
-    },
+    };
 
-    toString: function() {
+    toString () {
         return this.toArray().toString();
-    }
-
-};
-
-
-/************************ rework in es6 *****************/
-class BinarySearchTree {
-
-    //restore constructor
-  //  constructor: BinarySearchTree,
-    constructor() {
-            this._root = null;
     };
 
-    add (value) {
-        //create a new item object, place data in
-        var node = {
-                value: value,
-                left: null,
-                right: null
-            },
-
-            //used to traverse the structure
-            current;
-
-        //special case: no items in the tree yet
-        if (this._root === null){
-            this._root = node;
-        } else {
-            current = this._root;
-
-            while(true){
-
-                //if the new value is less than this node's value, go left
-                if (value < current.value){
-
-                    //if there's no left, then the new node belongs there
-                    if (current.left === null){
-                        current.left = node;
-                        break;
-                    } else {
-                        current = current.left;
-                    }
-
-                //if the new value is greater than this node's value, go right
-                } else if (value > current.value){
-
-                    //if there's no right, then the new node belongs there
-                    if (current.right === null){
-                        current.right = node;
-                        break;
-                    } else {
-                        current = current.right;
-                    }
-
-                //if the new value is equal to the current one, just ignore
-                } else {
-                    break;
-                }
-            }
-        }
-    };
-
-    contains (value){
-        var found       = false,
-            current     = this._root
-
-        //make sure there's a node to search
-        while(!found && current){
-
-            //if the value is less than the current node's, go left
-            if (value < current.value){
-                current = current.left;
-
-            //if the value is greater than the current node's, go right
-            } else if (value > current.value){
-                current = current.right;
-
-            //values are equal, found it!
-            } else {
-                found = true;
-            }
-        }
-
-        //only proceed if the node was found
-        return found;
-    }
 };
