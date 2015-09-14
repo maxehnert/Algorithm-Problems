@@ -241,7 +241,7 @@ class BinarySearchTree {
               process.call(this, node);
 
               //traverse the right subtree
-              if (node.right !== null){
+              if (node.right !== null) {
                   inOrder(node.right);
               }
           }
@@ -251,13 +251,37 @@ class BinarySearchTree {
       inOrder(this._root);
     };
 
+    largestNode (value) {
+
+      var current = this._root;
+
+      while (current) {
+        if(!current.right) {
+          return current.value;
+        }
+        current = current.right;
+      }
+    };
+
+    secondLargestNode (value) {
+
+      var current = this._root;
+
+      while (current) {
+        if(current.left && !current.right) {
+          return largestNode(current.left);
+        }
+        if(current.right && !current.right.left && !current.right.right) {
+          return current.value;
+        }
+        current = current.right;
+      }
+    }
+
     /**
      * Removes the node with the given value from the tree. This may require
      * moving around some nodes so that the binary search tree remains
      * properly balanced.
-     * @param {variant} value The value to remove.
-     * @return {void}
-     * @method remove
      */
     remove (value) {
 
