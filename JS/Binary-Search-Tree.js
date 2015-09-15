@@ -28,75 +28,6 @@ So the "rightmost" element must be the largest.
 
 How would we formalize getting the "rightmost" element in code?
 
-We can use a simple recursive approach. At each step:
-
-If there is a right child, that node and the subtree below it are all greater than the current node. So step down to this child and recurse.
-Else there is no right child and were already at the "rightmost" element, so we return its value.
-  def largest(root_node):
-    if root_node.right:
-        return largest(root_node.right)
-    return root_node.value
-Okay, so we can find the largest element. How can we adapt this approach to find the second largest element?
-
-Our first thought might be, "it's simply the parent of the largest element!" That seems obviously true when we imagine a nicely balanced tree like this one:
-
-  .        ( 5 )
-        /     \
-      (3)     (8)
-     /  \     /  \
-   (1)  (4) (7)  (9)
-But what if the largest element itself has a left subtree?
-
-  .        ( 5 )
-        /     \
-      (3)     (8)
-     /  \     /  \
-   (1)  (4) (7)  (12)
-                 /
-               (10)
-               /  \
-             (9)  (11)
-Here the parent of our largest is 8, but the second largest is 11!
-
-Drat, okay so the second largest isnt necessarily the parent of the largest...back to the drawing board...
-
-Wait. No. The second largest is the parent of the largest if the largest does not have a left subtree. If we can handle the case where the largest does have a left subtree, we can handle all cases, and we have a solution.
-
-So lets try sticking with this. How do we find the second largest when the largest has a left subtree?
-
-Its the largest item in that left subtree! Woah, we freaking just wrote a function for finding the largest element in a tree. We could use that here!
-
-How would we code this up?
-
-  def largest(root_node):
-    if root_node.right is not None:
-        return largest(root_node.right)
-    return root_node.value
-
-def find_second_largest(root_node):
-    # case: empty tree
-    if root_node is None:
-        return None
-
-    # case: were currently at largest, and
-    # largest has a left subtree
-    # 2nd largest is largest in said subtree
-    if root_node.left and not root_node.right:
-        return largest(root_node.left)
-
-    # case: were at parent of largest,
-    # and largest has no left subtree
-    # so largest must be current node
-    if root_node.right and \
-       not root_node.right.left and \
-       not root_node.right.right:
-        return root_node.value
-
-    # otherwise: step right
-    return find_second_largest(root_node.right)
-Okay awesome. Thisll work. Itll take O(h)O(h) time (where hh is the height of the tree) and O(h)O(h) space.
-
-But that hh space in the call stack ↴ is avoidable. How can we get this down to constant space?
 
 Solution
 We start with a function for getting the largest value. The largest value is simply the "rightmost" one, so we can get it in one walk down the tree by traversing rightward until we dont have a right child anymore:
@@ -141,7 +72,12 @@ def find_second_largest(root_node):
 Complexity
 Were doing one walk down our BST, which means O(h)O(h) time, where hh is the height of the tree (again, thats O(\lg{n})O(lgn) if the tree is balanced, O(n)O(n) otherwise). O(1)O(1) space.
 
-
+/*
+ * I tried a few different ways of creating a binary sort tree in JS before settling on the contructor type.
+ * This way provides a more modular method by adding constructors? such as (add, remove, contains, etc).
+ * Using a new feature in ES6, classes, I was able to simplify this without needing to touch prototype.
+ * This BST does more than what the origial question asked, but it gave me more practice with classes in ES6 and opens it up to add more features and search types to it.
+*/
 
 
 class BinarySearchTree {
@@ -276,7 +212,7 @@ class BinarySearchTree {
         }
         current = current.right;
       }
-    }
+    };
 
     /**
      * Removes the node with the given value from the tree. This may require
