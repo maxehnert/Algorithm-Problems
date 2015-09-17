@@ -82,8 +82,6 @@ Were doing one walk down our BST, which means O(h)O(h) time, where hh is the hei
 
 class BinarySearchTree {
 
-    //restore constructor
-  //  constructor: BinarySearchTree,
     constructor() {
             this._root = null;
     };
@@ -378,5 +376,4 @@ class BinarySearchTree {
     toString () {
         return this.toArray().toString();
     };
-
 };
