@@ -1,79 +1,15 @@
 
+/*
+This was the origial question I started with:
 
-Write a function to find the 2nd largest element in a binary search tree ↴
-A binary search tree is a binary tree in which, for each node:
+Write a function to find the 2nd largest element in a binary search tree.
 
-The nodes value is greater than all values in the left subtree.
-The nodes value is less than all values in the right subtree.
-BSTs are useful for quick lookups. If the tree is balanced, we can search for a given value in the tree in O(\lg{n})O(lgn) time.
-.
-Breakdown
-Lets start by solving a simplified version of the problem and see if we can adapt our approach from there. How would we find the largest element in a BST?
+This grew into something much larger however so I removed any of the content from IC regarding the question because of lack of relevancy.
+*/
 
-A reasonable guess is to say the largest element is simply the "rightmost" element.
-
-So maybe we can start from the root and just step down right child pointers until we cant anymore (until the right child is None). At that point the current node is the largest in the whole tree.
-
-Is this sufficient? We can prove it is by contradiction:
-
-If the largest element were not the "rightmost," then the largest element would either:
-
-be in some ancestor nodes left subtree, or
-have a right child.
-But each of these leads to a contradiction:
-
-If the node is in some ancestor node's left subtree it's smaller than that ancestor node, so its not the largest.
-If the node has a right child that child is larger than it, so its not the largest.
-So the "rightmost" element must be the largest.
-
-How would we formalize getting the "rightmost" element in code?
-
-
-Solution
-We start with a function for getting the largest value. The largest value is simply the "rightmost" one, so we can get it in one walk down the tree by traversing rightward until we dont have a right child anymore:
-
-  def find_largest(root_node):
-    current = root_node
-    while current:
-        if not current.right:
-            return current.value
-        current = current.right
-With this in mind, we can also find the second largest in one walk down the tree. At each step, we have a few cases:
-
-If we have a left subtree but not a right subtree, then the current node is the largest overall (the "rightmost") node. The second largest element must be the largest element in the left subtree. We use our get_largest() function above to find the largest in that left subtree!
-If we have a right child, but that right child node doesnt have any children, then the right child must be the largest element and our current node must be the second largest element!
-Else, we have a right subtree with more than one element, so the largest and second largest are somewhere in that subtree. So we step right.
-
-def find_largest(root_node):
-    current = root_node
-    while current:
-        if not current.right:
-            return current.value
-        current = current.right
-
-def find_second_largest(root_node):
-    current = root_node
-
-    while current:
-        # case: current is largest and has a left subtree
-        # 2nd largest is the largest in that subtree
-        if current.left and not current.right:
-            return find_largest(current.left)
-
-        # case: current is parent of largest, and
-        # largest has no children, so
-        # current is 2nd largest
-        if current.right and \
-           not current.right.left and \
-           not current.right.right:
-            return current.value
-
-        current = current.right
-Complexity
-Were doing one walk down our BST, which means O(h)O(h) time, where hh is the height of the tree (again, thats O(\lg{n})O(lgn) if the tree is balanced, O(n)O(n) otherwise). O(1)O(1) space.
 
 /*
- * I tried a few different ways of creating a binary sort tree in JS before settling on the contructor type.
+ * I tried a few different ways of creating a binary search tree in JS before settling on the contructor type.
  * This way provides a more modular method by adding constructors? such as (add, remove, contains, etc).
  * Using a new feature in ES6, classes, I was able to simplify this without needing to touch prototype.
  * This BST does more than what the origial question asked, but it gave me more practice with classes in ES6 and opens it up to add more features and search types to it.
