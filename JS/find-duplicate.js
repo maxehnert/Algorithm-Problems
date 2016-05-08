@@ -71,3 +71,12 @@ def find_duplicate(int_list):
   # since there are multiple values pointing to the first node
   # in the cycle, its position is a duplicate in our list
   return pointer_start
+
+
+
+  let findDup = (intList) => {
+    let n = intList - 1;
+    let positionInCycle = n + 1;
+
+    for ( var _ in xra)
+  }

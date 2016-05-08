@@ -10,6 +10,7 @@ let reverseString = str => {
     str[len -i] = str[i];
     str[i] = reverse_str;
   }
+  console.log(str.join(''));
   return str.join('');
 }
 

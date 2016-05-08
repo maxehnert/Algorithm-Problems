@@ -11,7 +11,11 @@
 let triplet = () => {
 
   	// Calculate all the primes in 1 million
-    var sieve = [], i, j, primes = [];
+    var sieve = [];
+    var i;
+    var j;
+    var primes = [];
+
     for (i = 2; i <= 1000000; ++i) {
         if (!sieve[i]) {
             // i has not been marked -- it is prime
@@ -22,4 +26,7 @@ let triplet = () => {
         }
     }
   	// primes now = an array of prime numbers][=]
-}
+    console.log(primes);
+    return primes;
+};
+triplet();

@@ -27,6 +27,7 @@ let noRepeat = str => {
         return console.log('this 1 different '+ char);
       }
 
+    };
   };
 };
 
