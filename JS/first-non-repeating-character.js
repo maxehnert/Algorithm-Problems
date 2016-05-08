@@ -23,7 +23,7 @@ let noRepeat = str => {
       */
       if( lastChar == char || char == ' ' ) {
         break;
-      }else {
+      } else {
         return console.log('this 1 different '+ char);
       }
 
