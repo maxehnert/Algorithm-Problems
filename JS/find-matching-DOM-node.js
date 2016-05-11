@@ -76,15 +76,16 @@
  * Here's the algorithm for iterarating over the trees
  */
 
-var rootA = document.querySelector('.rootA');
-var rootB = document.querySelector('.rootB')
-var targetA = document.querySelectorAll('.target-a')[0];
-var targetB = document.querySelectorAll('.target-a')[1];
+const rootA = document.querySelector('.rootA');
+const rootB = document.querySelector('.rootB')
+const targetA = document.querySelectorAll('.target-a')[0];
+const targetB = document.querySelectorAll('.target-a')[1];
 
-function getPath(root, target) {
-    var current = target;
-    var path = [];
-    var index;
+const getPath = (root, target) => {
+    let current = target;
+    let path = [];
+    let index;
+  
     while(current !== root) {
       
       // Finds the index of our target in the array of nodes
@@ -104,13 +105,11 @@ function getPath(root, target) {
 
 // getPath(rootA, targetA);
 
-function findNode(root, target, path) {
-  var current = root;
-  var i = 0;
+const findNode = (root, target, path) => {
+  let current = root;
+  let i = 0;
   
   while(current !== target) {
-
-    // Iterate down the DOM tree using our path array to guide us.
     current = current.childNodes[path[i]];
     i++;
   }
