@@ -1,5 +1,4 @@
-const arr =  [[[0, {a:'a'}], [1]], [[2], [3, false]], [[4], [5]]];
-
+const arr =  [[[0, {a:'a'}], [1]], [[2], [3, false], ['123', ['456', 789]]], [[4], [5, ['wer', 'c']]]];
 
 const masterFlatter = (arr) => {
   let flatArr = [];
