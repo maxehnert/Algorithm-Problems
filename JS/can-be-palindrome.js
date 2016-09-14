@@ -1,4 +1,4 @@
-const canBePalindrome(str) => {
+const canBePalindrome = (str) => {
   str = str.toLowerCase();
   let letterCounts = {};
   let letter;
@@ -13,6 +13,8 @@ const canBePalindrome(str) => {
   for (value in letterCounts) {
     palindromeSum += letterCounts[value] % 2;
   }
+
+  return palindromeSum < 2 ? true : false;
 };
 
 

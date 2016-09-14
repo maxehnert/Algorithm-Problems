@@ -58,3 +58,17 @@ console.log(outArr);
 }
 
 removeDuplicate([1,3,324,3,11,5,6,2,2,3,7,8,1]); // [1, 2, 3, 5, 6, 7, 8, 11, 324]
+
+
+const removeDupWords = (str) => {
+  let arr = [];
+  str = str.split(' ');
+  var strLength = str.length;
+  for (var i = 0; i < strLength; i++) {
+    if (arr.indexOf(str[i]) === -1) {
+      arr.push(str[i]);
+    }
+  }
+
+  return arr.join(' ');
+};
