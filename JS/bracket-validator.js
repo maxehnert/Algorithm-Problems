@@ -75,7 +75,7 @@ let checkBracket = code => {
   openers_to_closers.set('{','}');
   openers_to_closers.set('[',']');
 
-  let openers =[];
+  let openers = [];
   let closers = [];
   let openers_stack = [];
 

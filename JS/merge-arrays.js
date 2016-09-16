@@ -99,7 +99,8 @@ let mergeArrays = (myArr, yourArr) => {
     var isMyArrExhausted = currentIndexMe >= myArr.length;
     var isYourArrExhausted = currentIndexYou >= yourArr.length;
 
-    if ( !isMyArrExhausted && ( isYourArrExhausted || myArr[currentIndexMe] < yourArr[currentIndexYou] )) {
+    if ( !isMyArrExhausted &&
+       ( isYourArrExhausted || myArr[currentIndexMe] < yourArr[currentIndexYou] )) {
 
       mergedArr[currentIndexMerged] = myArr[currentIndexMe];
       currentIndexMe += 1;
