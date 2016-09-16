@@ -7,6 +7,11 @@
  *
  */
 
+
+/**
+ * Directly extending the Array prototype
+ */
+
  Array.prototype.duplicate = function() {
     var self = this;
     var arrCopy = Array.from(self);
@@ -20,10 +25,27 @@
 };
 
 /**
- * Another way of doing this
+ * Another approach using Object.defineProperty to create the property on the prototype
  */
 Object.defineProperty(Array.prototype, 'duplicate', {
   value() {
+    var self = this;
+    var arrCopy = Array.from(self);
+    var len = arrCopy.length;
+
+    for (var i = 0; i < len; i++) {
+      self.splice((arrCopy[i] + i), 0, arrCopy[i]);
+    }
+
+    return self;
+  }
+});
+
+/**
+ * ES6 way of doing the same as Object.defineProperty, but using Object.assign
+ */
+Object.assign(Array.prototype, {
+  duplicate() {
     var self = this;
     var arrCopy = Array.from(self);
     var len = arrCopy.length;
