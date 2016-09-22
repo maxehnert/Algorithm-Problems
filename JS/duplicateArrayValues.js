@@ -30,7 +30,7 @@
 Object.defineProperty(Array.prototype, 'duplicate', {
   value() {
     var self = this;
-    var arrCopy = Array.from(self);
+    var arrCopy = [].slice.call(self);
     var len = arrCopy.length;
 
     for (var i = 0; i < len; i++) {
