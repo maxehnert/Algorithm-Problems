@@ -67,91 +67,103 @@ O(n)O(n) time (one iteration through the string), and O(n)O(n) space (in the wor
 
 let checkBracket = code => {
 
-  // Instead of creating an object, I'll take advantage of ES6's new Map feature
-  let openers_to_closers = new Map();
+  // map over the array of brackets to check
+  return arr.map((code) => {
 
-  // Add the openers and closers to the Map
-  openers_to_closers.set('(',')');
-  openers_to_closers.set('{','}');
-  openers_to_closers.set('[',']');
+    // Instead of creating an object, I'll take advantage of ES6's new Map feature
+    let openers_to_closers = new Map();
 
-  let openers = [];
-  let closers = [];
-  let openers_stack = [];
+    // Add the openers and closers to the Map
+    openers_to_closers.set('(',')');
+    openers_to_closers.set('{','}');
+    openers_to_closers.set('[',']');
 
-  // Build out our openers and closers array with values from the Map
-  let logMap = (value, key, map) => {
-    openers.push(key);
-    closers.push(value);
-  };
+    let openers = [];
+    let closers = [];
+    let openers_stack = [];
 
-  // Callback to run the above function
-  openers_to_closers.forEach(logMap);
+    // Build out our openers and closers array with values from the Map
+    let logMap = (value, key, map) => {
+      openers.push(key);
+      closers.push(value);
+    };
 
-  // Iterate over our input param
-  for( char of code ) {
+    // Callback to run the above function
+    openers_to_closers.forEach(logMap);
 
-    // Checking the opener array [ (,{,[ ]
-    for( let i of openers ) {
+    // Iterate over our input param
+    for ( var char of code ) {
 
-      // If the char is an opener
-      if( char == i ) {
-        // Insert it into the open_stack array
-        openers_stack.push(char);
+      // Checking the opener array [ (,{,[ ]
+      for ( let i of openers ) {
+
+        // If the char is an opener
+        if ( char == i ) {
+          // Insert it into the open_stack array
+          openers_stack.push(char);
+        }
       }
-    }
 
-  	//checking the closer array [ ),},] ]
-    for( let i of closers ) {
+    	//checking the closer array [ ),},] ]
+      for ( let i of closers ) {
 
-      // if the char is a closer...
-      if( char == i ) {
+        // if the char is a closer...
+        if ( char == i ) {
 
-        // If You have a closer but no openers
-        if( openers_stack.length == 0 ) {
+          // If You have a closer but no openers
+          if ( openers_stack.length == 0 ) {
 
-          console.log( "There aren't any " + openers + " in your program" );
-          return false;
+            console.log( "There aren't any " + openers + " in your program" );
+            return false;
 
-        } else {
+          } else {
 
-          // check if the current char is a closer for the last opener in the open_stack array
-          for( let i of openers_stack ) {
+            // check if the current char is a closer for the last opener in the open_stack array
+            for ( let i of openers_stack ) {
 
-            // Grab the last opener in the array
-            let checkem = openers_stack[openers_stack.length -1];
+              // Grab the last opener in the array
+              let checkem = openers_stack[openers_stack.length - 1];
 
-							 // If the closer for the last opener matches the current char..
-               // Note the use of .get() here is because openers_to_closers is a Map not an object
-              if( openers_to_closers.get(checkem) == char ) {
+  							 // If the closer for the last opener matches the current char..
+                 // Note the use of .get() here is because openers_to_closers is a Map not an object
+                if ( openers_to_closers.get(checkem) == char ) {
 
-              // Setting this var to the last opener in the array
-              let last_unclosed_opener = openers_stack.pop();
+                // Setting this var to the last opener in the array
+                let last_unclosed_opener = openers_stack.pop();
 
-              // Note the use of .get() here is because openers_to_closers is a Map not an object
-              if ( !openers_to_closers.get(last_unclosed_opener) == char ) {
+                // Note the use of .get() here is because openers_to_closers is a Map not an object
+                if ( !openers_to_closers.get(last_unclosed_opener) == char ) {
 
-                console.log( 'your code sucks ' + char )
-                return false
+                  console.log( 'your code sucks ' + char )
+                  return false
+                }
+                // Escape the loop after removing that last char from the openers stack
+                break;
+
+               // If there is no opener that matches the same style closer
+              } else {
+                console.log( 'no opener for your closer ' + char) ;
+                return false;
               }
-              // Escape the loop after removing that last char from the openers stack
-              break;
-
-             // If there is no opener that matches the same style closer
-            } else {
-              console.log( 'no opener for your closer ' + char) ;
-              return false;
             }
-          }
-      	}
+        	}
+        }
       }
     }
-  }
 
-  console.log( openers_stack.length == [] );
-  return openers_stack.length == [];
+    console.log( openers_stack.length == [] );
+    // return openers_stack.length == [];
+    return openers_stack.length == [];
+  })
 }
 
-checkBracket('({}{[]}({}))'); // true;
-checkBracket('({}{[]]}())'); // false
-//                  ^ error
+// checkBracket('({}{[]}({}))'); // true;
+// checkBracket('({}{[]]}())'); // false
+// //                  ^ error
+
+checkBracket(
+  [
+  '({}{[]}({}))', // YES
+  '({}{[]]}())' // NO
+  ]
+)
