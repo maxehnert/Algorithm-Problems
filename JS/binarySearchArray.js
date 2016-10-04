@@ -11,6 +11,7 @@ var binarySort = function(arr, target) {
   var guess;
 
   while (min <= max) {
+    console.log('min ', min, ' <= ', max, ' max');
     guess = Math.floor((min + max) / 2);
 
     if (arr[guess] === target) {
@@ -26,3 +27,25 @@ var binarySort = function(arr, target) {
 };
 
 binarySort(arr, 67);
+
+
+const bSort = (arr, target) => {
+  let min = 0;
+  let max = arr.length - 1;
+  let guess;
+
+  while (min <= max) {
+    guess = Math.floor((min + max) / 2);
+
+    if (arr[guess] === target) {
+      console.log(guess);
+      return guess;
+    } else if (arr[guess] < target) {
+      min = guess + 1;
+    } else {
+      max = guess - 1;
+    }
+  }
+
+  return -1;
+}
