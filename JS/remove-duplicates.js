@@ -72,3 +72,21 @@ const removeDupWords = (str) => {
 
   return arr.join(' ');
 };
+
+
+// if the word doesnt exist in the array yet add it
+// if our current word is already in the array then theres 2 of them, so remove it from our array
+var removeDupWords = (arr) => {
+  let newArray = [];
+  var len = arr.length;
+
+  for (var i = 0; i < len; i++) {
+    if (newArray.indexOf(arr[i]) === -1) {
+      newArray.push(arr[i]);
+    } else {
+      newArray.splice(newArray.indexOf(arr[i]), 1)
+    }
+  }
+
+  return newArray
+};
