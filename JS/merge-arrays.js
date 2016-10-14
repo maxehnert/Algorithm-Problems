@@ -119,3 +119,41 @@ var myArr = [3, 4, 6, 10, 11, 15];
 var yourArr = [1, 5, 8, 12, 14, 19];
 
 mergeArrays(myArr, yourArr); // [1, 3, 4, 5, 6, 8, 10, 11, 12, 14, 15, 19]
+mergeArrays.call(null, myArr, yourArr); // Add as many array
+
+
+var mergeArrays = (myArr, yourArr) => {
+  let mergedArraySize = myArr.length + yourArr.length;
+  var cArr = Array.from(myArr);
+
+  //sloppy way, push one array into the other and sorted
+  var len = yourArr.length;
+  for (var i = 0; i < len; i++) {
+    cArr.push(yourArr[i]);
+  }
+
+  return cArr.sort((a,b) => {
+    return a > b ? 1 : a < b ? -1 : 0
+  })
+}
+
+
+// to merge a list of arrays you can use a multidimential array flattener with .call or .apply
+// then use the spread operator in the function params
+const masterFlatter = (...arr) => {
+  let flatArr = [];
+
+  const flatten = (arr) => {
+    return arr.map(v => {
+      return Array.isArray(v) ? flatten(v) : flatArr.push(v);
+    });
+  };
+
+  flatten(arr);
+
+  console.log(flatArr);
+  return flatArr;
+};
+
+masterFlatter.apply(null, [myArr, yourArr, coolArr]);
+masterFlatter.call(null, myArr, yourArr, coolArr);
