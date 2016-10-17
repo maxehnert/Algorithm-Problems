@@ -6,22 +6,22 @@
  * Preform a binary search
  *
  **/
-const words = [
-    'ptolemaic',
-    'retrograde',
-    'supplant',
-    'undulate',
-    'xenoepist',
-    'yweewr',
-    'yyyyy',
-    'zasd',
-    'asymptote',
-    'babka',
-    'banoffee',
-    'engender',
-    'karpatka',
-    'othellolagkage',
-];
+// const words = [
+//     'ptolemaic',
+//     'retrograde',
+//     'supplant',
+//     'undulate',
+//     'xenoepist',
+//     'yweewr',
+//     'yyyyy',
+//     'zasd',
+//     'asymptote',
+//     'babka',
+//     'banoffee',
+//     'engender',
+//     'karpatka',
+//     'othellolagkage',
+// ];
 
 const findRotationPoint = (words) => {
   const firstWord = words[0];
@@ -51,8 +51,10 @@ const findRotationPoint = (words) => {
       }
   }
 
-  console.log(endIndex);
-  return endIndex;
+  console.log(words[endIndex]);
+  return words[endIndex];
 }
 
-findRotationPoint(words)
+module.exports = findRotationPoint
+
+// findRotationPoint(words)

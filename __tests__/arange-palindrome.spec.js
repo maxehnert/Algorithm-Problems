@@ -1,5 +1,9 @@
 test('arranges babccab to acbbbca', () => {
-  const asd = require('../JS/arrange-palindrome');
-  console.log(asd);
-  expect(asd('babccab')).toBe('acbbbca')
+  const arrangePalindrome = require('../JS/arrange-palindrome')
+  expect(arrangePalindrome('babccab')).toBe('acbbbca')
+})
+
+test('abca isnt a palindrome, returns -1', () => {
+  const arrangePalindrome = require('../JS/arrange-palindrome')
+  expect(arrangePalindrome('abca')).toBe(-1)
 })
