@@ -1,0 +1,23 @@
+{
+  "name": "interview-cake-problems",
+  "version": "1.0.0",
+  "description": "#### Checkout the JS folder for the problem sets",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^16.0.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxehnert/Algorithm-Problems.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxehnert/Algorithm-Problems/issues"
+  },
+  "homepage": "https://github.com/maxehnert/Algorithm-Problems#readme"
+}

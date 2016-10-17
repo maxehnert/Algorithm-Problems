@@ -1,4 +1,5 @@
 const arrangePalindrome = (str) => {
+
     // set the string to lower case first
     str = str.toLowerCase();
 
@@ -43,12 +44,15 @@ const arrangePalindrome = (str) => {
       // When all the even count chars have gone in, push the Odd char(s) in
       newArr.splice(newArr.length/2, 0, ...oddLetter);
 
-      return console.log(newArr.join(''));
+      return newArr.join('') //console.log(newArr.join(''));
 
     } else {
-      return console.log(-1);
+      return -1 //console.log(-1);
     }
 
 };
-arrangePalindrome('babccab'); //'acbbbca'
-arrangePalindrome('abca'); // -1
+
+module.exports = arrangePalindrome;
+
+// arrangePalindrome('babccab'); //'acbbbca'
+// arrangePalindrome('abca'); // -1
