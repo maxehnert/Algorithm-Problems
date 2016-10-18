@@ -13,13 +13,12 @@
  */
 
  Array.prototype.duplicate = function() {
-    var self = this;
-    var arrCopy = Array.from(self);
-    var len = arrCopy.length;
+   var self = this.sort((a, b) => a - b);
+   var i = self.length;
 
-    for (var i = 0; i < len; i++) {
-      self.splice((arrCopy[i] + i), 0, arrCopy[i]);
-    }
+   while( i-- ) {
+     self.splice(i + 1, 0, self[i])
+   };
 
     return self;
 };
@@ -29,13 +28,12 @@
  */
 Object.defineProperty(Array.prototype, 'duplicate', {
   value() {
-    var self = this;
-    var arrCopy = [].slice.call(self);
-    var len = arrCopy.length;
+    var self = this.sort((a, b) => a - b);
+    var i = self.length;
 
-    for (var i = 0; i < len; i++) {
-      self.splice((arrCopy[i] + i), 0, arrCopy[i]);
-    }
+    while( i-- ) {
+      self.splice(i + 1, 0, self[i])
+    };
 
     return self;
   }
@@ -44,19 +42,18 @@ Object.defineProperty(Array.prototype, 'duplicate', {
 /**
  * ES6 way of doing the same as Object.defineProperty, but using Object.assign
  */
-Object.assign(Array.prototype, {
-  duplicate() {
-    var self = this;
-    var arrCopy = Array.from(self);
-    var len = arrCopy.length;
+ Object.assign(Array.prototype, {
+   duplicate() {
+     var self = this.sort((a, b) => a - b);
+     var i = self.length;
 
-    for (var i = 0; i < len; i++) {
-      self.splice((arrCopy[i] + i), 0, arrCopy[i]);
-    }
+     while( i-- ) {
+       self.splice(i + 1, 0, self[i])
+     };
 
-    return self;
-  }
-});
+     return self;
+   }
+ });
 
 
 var arr = [1,2,3,4,5];
