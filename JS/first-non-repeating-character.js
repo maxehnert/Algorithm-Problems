@@ -16,19 +16,21 @@ let noRepeat = str => {
     if (!lastChar) {
       lastChar = char;
     }
-    while(lastChar) {
-      /*
-       * As long as the last character stays the same do nothing
-       * Skip blank spaces.
-      */
-      if( lastChar == char || char == ' ' ) {
-        break;
-      } else {
-        return console.log('this 1 different '+ char);
-      }
 
-    };
+    /*
+     * As long as the last character stays the same do nothing
+     * Skip blank spaces.
+    */
+    if( lastChar == char || char == ' ' ) {
+      continue;
+    } else {
+      console.log('this 1 different '+ char);
+      return char;
+    }
   };
+
+  // only 1 character type
+  return 'all the same'
 };
 
 noRepeat('aa aaAb');

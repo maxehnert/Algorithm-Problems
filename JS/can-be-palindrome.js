@@ -10,7 +10,7 @@ const canBePalindrome = (str) => {
     letterCounts[letter]++;
   }
 
-  for (value in letterCounts) {
+  for (let value in letterCounts) {
     palindromeSum += letterCounts[value] % 2;
   }
 
