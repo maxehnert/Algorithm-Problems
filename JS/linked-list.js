@@ -29,3 +29,21 @@ SinglyList.prototype.add = function(value) {
 
   return node
 }
+
+SinglyList.prototype.searchNodeAt = function(position) {
+  var currentNode = this.head
+  var length = this._length
+  var count = 1
+  var message = {failure: 'Failure node doesnt exist'}
+
+  if (length === 0 || position < 1 || position > length) {
+    throw new Error(message.failure)
+  }
+
+  while (count < position) {
+    currentNode = currentNode.next
+    count++
+  }
+
+  return currentNode
+}
