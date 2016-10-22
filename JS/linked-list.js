@@ -47,3 +47,39 @@ SinglyList.prototype.searchNodeAt = function(position) {
 
   return currentNode
 }
+
+SinglyList.prototype.remove = function(position) {
+  var currentNode = this.head
+  var length = this._length
+  var count = 0
+  var message = {failure: 'Node doesnt exist'}
+  var beforeNodeToDelete = null
+  var nodeToDelete = null
+  var deletedNode = null
+
+  if (position < 0 || position > length) {
+    throw new Error(message.failure)
+  }
+
+  if (position === 1) {
+    this.head = currentNode.next
+    deletedNode = currentNode
+    currentNode = null
+    this._length--
+
+    return deletedNode
+  }
+
+  while (count < position) {
+    beforeNodeToDelete = currentNode
+    nodeToDelete = currentNode.next
+    count++
+  }
+
+  beforeNodeToDelete.next = nodeToDelete.next
+  deletedNode = nodeToDelete
+  nodeToDelete = null
+  this._length--
+
+  return deletedNode
+}
